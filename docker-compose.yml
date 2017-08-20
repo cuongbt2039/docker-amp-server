@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  pkdt-mysql:
+    image: mysql:latest
+    volumes:
+       - db_data:/var/lib/mysql
+    ports:
+       - "3306:3306"
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 1
+      MYSQL_DATABASE: pkdt
+      MYSQL_USER: pkdt
+      MYSQL_PASSWORD: 1
+
+  pkdt-sv:
+    depends_on:
+       - pkdt-mysql
+    image: apache-php-sv:latest
+    volumes:
+      - F:/Work/Developer/Wordpress/phukiendt:/var/www/phukiendt
+    ports:
+      - "80:80"
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: pkdt-mysql:3306
+      WORDPRESS_DB_USER: pkdt
+      WORDPRESS_DB_PASSWORD: 1
+volumes:
+    db_data:
