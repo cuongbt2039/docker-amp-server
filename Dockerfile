@@ -24,7 +24,6 @@ RUN /usr/sbin/a2ensite default-ssl
 RUN /usr/sbin/a2enmod ssl
 
 # Copy this repo into place.
-ADD phukiendt /var/www/phukiendt
 
 # Update the default apache site with the config we created.
 ADD apache-config.conf /etc/apache2/sites-enabled/000-default.conf
